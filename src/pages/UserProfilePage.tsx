@@ -1,4 +1,5 @@
-import { useGetMyUser, useUpdateMyUser } from '../api/MyUserApi';
+import { useGetMyUser } from '../api/user/useGetMyUser';
+import { useUpdateMyUser } from '../api/user/useUpdateMyUser';
 import UserProfileForm from '../forms/user-profile-form/UserProfileForm';
 
 export default function UserProfilePage() {
