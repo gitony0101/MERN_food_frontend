@@ -160,4 +160,24 @@ export const useUpdateMyUser = () => {
 
 ```
 
+## Render
+
+
+
+
+```
+> tsc -b && vite build
+src/src/components/ui/button.tsx(5,20): error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+src/src/components/ui/form.tsx(13,20): error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+src/src/components/ui/form.tsx(14,23): error TS2307: Cannot find module '@/components/ui/label' or its corresponding type declarations.
+src/src/components/ui/label.tsx(5,20): error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://docs.render.com/troubleshooting-deploys
+
+```
+
+
+
+
+
 
