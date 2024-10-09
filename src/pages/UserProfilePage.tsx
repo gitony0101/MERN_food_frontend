@@ -20,9 +20,3 @@ export default function UserProfilePage() {
     />
   );
 }
-
-// export default function UserProfilePage() {
-//   const { updateUser, isLoading } = useUpdateMyUser();
-
-//   return <UserProfileForm onSave={updateUser} isLoading={isLoading} />;
-// }
