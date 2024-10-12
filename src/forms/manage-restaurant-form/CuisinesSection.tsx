@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from '../../components/ui/form';
 import { cuisineList } from '../../config/restaurant-options-config';
-import CuisineCheckbox from './CuisineCheckBox.tsx';
+import CuisineCheckbox from './CuisineCheckbox';
 
 export default function CuisinesSection() {
   const { control } = useFormContext();
@@ -23,9 +23,13 @@ export default function CuisinesSection() {
         name="cuisines"
         render={({ field }) => (
           <FormItem>
-            <div className="gird md:grid-cols-5 gap-1">
-              {cuisineList.map((cusineItem) => (
-                <CuisineCheckbox cuisine={cusineItem} field={field} />
+            <div className="grid md:grid-cols-5 gap-1">
+              {cuisineList.map((cuisineItem, index) => (
+                <CuisineCheckbox
+                  key={index} // 使用索引作为唯一标识符
+                  cuisine={cuisineItem}
+                  field={field}
+                />
               ))}
             </div>
             <FormMessage />

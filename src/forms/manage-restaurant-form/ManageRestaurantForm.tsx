@@ -6,6 +6,9 @@ import { useForm } from 'react-hook-form';
 import { Separator } from '../../components/ui/separator';
 import CuisinesSection from './CuisinesSection';
 import MenuSection from './MenuSection';
+import ImageSection from './ImageSection';
+import LoadingButton from '../../components/LoadingButton';
+import { Button } from '../../components/ui/button';
 
 const formSchema = z
   .object({
@@ -65,9 +68,33 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
 
   const onSubmit = (formDataJson: RestaurantFormData) => {
     //TODO ; Conver formDataJson to a new FormData object
+    const formData = new FormData();
+    formData.append('restaurantName', formDataJson.restaurantName);
+    formData.append('city', formDataJson.city);
+    formData.append('country', formDataJson.country);
+    formData.append('deliveryPrice', formDataJson.deliveryPrice.toString());
+    formData.append(
+      'estimatedDeliveryTime',
+      formDataJson.estimatedDeliveryTime.toString(),
+    );
+    formDataJson.cuisines.forEach((cuisine, index) => {
+      formData.append(`cuisines[${index}]`, cuisine);
+    });
+    formDataJson.menuItems.forEach((menuItem, index) => {
+      formData.append(`menuItems[${index}][name]`, menuItem.name);
+    });
+    formDataJson.menuItems.forEach((menuItem, index) => {
+      formData.append(`menuItems[${index}][price]`, menuItem.price.toString());
+    });
+    // 处理 imageFile，如果存在则添加到 FormData
+    if (formDataJson.imageFile) {
+      formData.append('imageFile', formDataJson.imageFile);
+    }
+    onSave(formData);
   };
   return (
     <Form {...form}>
+      {' '}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 bg-gray-50 p-10 rounded-lg"
@@ -76,6 +103,8 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         <Separator />
         <CuisinesSection />
         <MenuSection />
+        <ImageSection />
+        {isLoading ? <LoadingButton /> : <Button type="submit">Submit</Button>}
       </form>
     </Form>
   );
