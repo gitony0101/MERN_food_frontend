@@ -7,9 +7,12 @@ import {
   FormMessage,
 } from '../../components/ui/form';
 import { Input } from '../../components/ui/input';
+import { AspectRatio } from '../../components/ui/aspect-ratio';
 
 export default function ImageSection() {
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
+  const existingImageUrl = watch('imageUrl');
+
   return (
     <div className="space-y-2">
       <div>
@@ -19,7 +22,15 @@ export default function ImageSection() {
           search results. Adding a new image will overwrite the existing one.
         </FormDescription>
       </div>
-      <div className="flex-col gap-8 w-[50%]">
+      <div className="flex-col gap-8 md:w-[50%]">
+        {existingImageUrl && (
+          <AspectRatio ratio={16 / 9}>
+            <img
+              src={existingImageUrl}
+              className="rounded-md object-cover h-full w-full"
+            />
+          </AspectRatio>
+        )}
         <FormField
           control={control}
           name="imageFile"
