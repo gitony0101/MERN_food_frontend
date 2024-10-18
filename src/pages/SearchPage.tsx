@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useSearchRestaurants } from '../api/restaurant/RestaurantApi';
+import { useSearchRestaurants } from '../api/restaurant/SearchRestaurants';
 import SearchResultInfo from '../components/SearchResultInfo';
 import SearchResultCard from '../components/SearchResultCard';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ export default function SearchPage() {
   };
 
   if (isLoading) {
-    <span>Loading...</span>;
+    return <span>Loading...</span>;
   }
 
   if (!results?.data || !city) {
