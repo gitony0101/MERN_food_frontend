@@ -12,7 +12,7 @@ export default function SearchResultInfo({ total, city }: Props) {
         {total} Restaurants found in {city}{' '}
         <Link
           to="/"
-          className="text-sm font-semibold underline cursor-pointer text-blue-500"
+          className="ml-1 text-sm font-semibold underline cursor-pointer text-blue-500"
         >
           {' '}
           Change Location

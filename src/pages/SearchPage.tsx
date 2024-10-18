@@ -3,7 +3,7 @@ import { useSearchRestaurants } from '../api/restaurant/RestaurantApi';
 import SearchResultInfo from '../components/SearchResultInfo';
 import SearchResultCard from '../components/SearchResultCard';
 import { useState } from 'react';
-import SearchBar, { type SearchForm } from '../components/SearchBar';
+import SearchBar, { SearchForm } from '../components/SearchBar';
 
 export type SearchState = {
   searchQuery: string;
@@ -16,10 +16,10 @@ export default function SearchPage() {
   });
   const { results, isLoading } = useSearchRestaurants(searchState, city);
 
-  const setSearchQuery = (searchFromData: SearchForm) => {
+  const setSearchQuery = (searchFormData: SearchForm) => {
     setSearchState((prevState) => ({
       ...prevState,
-      searchQuery: searchFromData.searchQuery,
+      searchQuery: searchFormData.searchQuery,
     }));
   };
 
@@ -43,9 +43,9 @@ export default function SearchPage() {
       <div id="cuisines-list">insert cuisines here.</div>
       <div id="main-content" className="flex flex-col gap-5">
         <SearchBar
-          searchQuery={searchState.searchQuery}
-          onSubmit={setSearchQuery}
+          searchQuery={searchState.searchQuery || ''}
           placeHolder="Search by Cuisine or Restaurant Name"
+          onSubmit={setSearchQuery}
           onReset={resetSearch}
         />
         <SearchResultInfo total={results.pagination.total} city={city} />

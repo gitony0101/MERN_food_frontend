@@ -25,23 +25,30 @@ type Props = {
 const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(formSchema),
-    defaultValues: { searchQuery },
+    defaultValues: {
+      searchQuery,
+    },
   });
+
   useEffect(() => {
     form.reset({ searchQuery });
   }, [form, searchQuery]);
 
   const handleReset = () => {
-    form.reset({ searchQuery: '' });
+    form.reset({
+      searchQuery: '',
+    });
+
+    if (onReset) {
+      onReset();
+    }
   };
-  if (onReset) {
-    onReset();
-  }
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center flex-1 gap-3 justify-between flex-row border-2  rounded-2 p-3 mx-5 ${
+        className={`flex items-center gap-3 justify-between flex-row border-2 rounded-full p-3 ${
           form.formState.errors.searchQuery && 'border-red-500'
         }`}
       >
@@ -58,13 +65,14 @@ const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  className="border-none shadow-none text-xl focus-visible:ring:0"
+                  className="border-none shadow-none text-xl focus-visible:ring-0"
                   placeholder={placeHolder}
                 />
               </FormControl>
             </FormItem>
           )}
         />
+
         <Button
           onClick={handleReset}
           type="button"
@@ -74,7 +82,7 @@ const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
           Reset
         </Button>
         <Button type="submit" className="rounded-full bg-orange-500">
-          Search!
+          Search
         </Button>
       </form>
     </Form>
