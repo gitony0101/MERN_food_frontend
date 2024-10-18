@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { useSearchRestaurants } from '../api/restaurant/SearchRestaurants';
+
 import SearchResultInfo from '../components/SearchResultInfo';
 import SearchResultCard from '../components/SearchResultCard';
 import { useState } from 'react';
 import SearchBar, { SearchForm } from '../components/SearchBar';
+import { useSearchRestaurants } from '../api/restaurant/searchRestaurants';
 
 export type SearchState = {
   searchQuery: string;
