@@ -182,3 +182,37 @@ src/src/components/ui/label.tsx(5,20): error TS2307: Cannot find module '@/lib/u
 
 
 10.22 manage restaurant db fully works
+
+
+
+```ts
+import { CartItem } from "../pages/DetailPage";
+import { Restaurant } from "../types";
+
+
+////
+
+export type CartItem = {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+
+```
+
+- move the  cartItem to the types?
+
+
+
+
+delete logic:
+
+```typescript
+
+const updatedCartItems = prevCartItems.filter(
+        (item) => cartItem._id !== item._id,
+      );
+
+```
