@@ -209,10 +209,38 @@ export type CartItem = {
 
 delete logic:
 
-```typescript
+```ts
 
 const updatedCartItems = prevCartItems.filter(
         (item) => cartItem._id !== item._id,
       );
 
 ```
+
+
+
+```typescript
+
+sessionStorage.setItem(
+        `cartItems-${restaurantId}`,
+        JSON.stringify(updatedCartItems),
+      ); 
+
+```
+
+Encapsulate the logic in the cartItem.ts
+
+```typescript
+
+function saveCartItems(restaurantId, cartItems) {
+  sessionStorage.setItem(
+    `cartItems-${restaurantId}`,
+    JSON.stringify(cartItems)
+  );
+}
+
+```
+
+
+
+
