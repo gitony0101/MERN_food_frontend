@@ -22,7 +22,7 @@ export default function CheckoutButton() {
   if (!isAuthenticated) {
     return (
       <Button onClick={onLogin} className="bg-orange-500 flex-1">
-        Log in to chec kout
+        Log in to check out
       </Button>
     );
   }
