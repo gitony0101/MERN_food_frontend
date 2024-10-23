@@ -11,9 +11,14 @@ import { useGetMyUser } from '../api/user/useGetMyUser';
 type Props = {
   onCheckout: (userFormData: UserFormData) => void;
   disabled: boolean;
+  isLoading: boolean;
 };
 
-export default function CheckoutButton({ onCheckout, disabled }: Props) {
+export default function CheckoutButton({
+  onCheckout,
+  disabled,
+  isLoading,
+}: Props) {
   const {
     isAuthenticated,
     isLoading: isAuthLoading,
@@ -38,7 +43,7 @@ export default function CheckoutButton({ onCheckout, disabled }: Props) {
       </Button>
     );
   }
-  if (isAuthLoading || !currentUser) {
+  if (isAuthLoading || !currentUser || isLoading) {
     return <LoadingButton />;
   }
   return (
