@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUpdateMyRestaurantOrder } from '../api/order/UpdateMyRestaurantOrder';
 import { ORDER_STATUS } from '../config/order-status-config';
 import type { Order, OrderStatus } from '../types';
@@ -21,6 +21,10 @@ type Props = {
 export default function OrderItemCard({ order }: Props) {
   const { updateRestaurantStatus, isLoading } = useUpdateMyRestaurantOrder();
   const [status, setStatus] = useState<OrderStatus>(order.status);
+
+  useEffect(() => {
+    setStatus(order.status);
+  }, [order.status]);
 
   const handleStatusChange = async (newStatus: OrderStatus) => {
     await updateRestaurantStatus({
